@@ -1,25 +1,34 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { RouterView, useRoute } from 'vue-router'
-import BottomNav from './components/BottomNav.vue'
 import FloatingHearts from './components/FloatingHearts.vue'
-
-const route = useRoute()
-const showNav = ref(false)
-
-onMounted(() => {
-  setTimeout(() => { showNav.value = true }, 3000)
-})
+import HeroSection from './sections/HeroSection.vue'
+import GallerySection from './sections/GallerySection.vue'
+import TimelineSection from './sections/TimelineSection.vue'
+import LetterSection from './sections/LetterSection.vue'
+import QuizSection from './sections/QuizSection.vue'
+import WishesSection from './sections/WishesSection.vue'
+import SurpriseSection from './sections/SurpriseSection.vue'
 </script>
 
 <template>
-  <div class="app-container">
+  <div class="page-wrapper">
     <FloatingHearts />
-    <RouterView v-slot="{ Component }">
-      <Transition name="page" mode="out-in">
-        <component :is="Component" @showNav="showNav = true" />
-      </Transition>
-    </RouterView>
-    <BottomNav v-if="showNav && route.path !== '/'" />
+    <HeroSection />
+    <GallerySection />
+    <TimelineSection />
+    <LetterSection />
+    <QuizSection />
+    <WishesSection />
+    <SurpriseSection />
   </div>
 </template>
+
+<style>
+/* overflow-x hidden on body, NOT wrapper — sticky breaks if wrapper has overflow */
+body { overflow-x: clip; }
+
+.page-wrapper {
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+}
+</style>
